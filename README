@@ -1,0 +1,45 @@
+*** Copyright
+
+The main part of the code is
+
+    Copyright (C) 2011  Vincenzo Comito
+
+    Some contributed code is copyrighted by the contributors, in these
+    cases that is indicated in the source files in question.
+
+    PDGT is released under GPL, see the file COPYING for
+    details.
+
+*** Description
+
+PDGT it's just a bar (I place it under dwm's bar), click on it with 
+the right mouse button and you will get the translation of the current 
+mouse selection. 
+I still need to check the regex, but it seems to work fine.
+
+*** Usage
+
+Remember, use python 3
+
+Usage: main.py [options] arg1
+
+ Right click on bar to retrive translation of the mouse selection
+
+ Options:
+   --version             show program's version number and exit
+   -h, --help            show this help message and exit
+   -w WIDTH, --width=WIDTH
+                         set the width of the window in character units
+   -x X, --xposition=X   set the horizontal position of the window in pixel
+   -y Y, --yposition=Y   set the vertical position of the window in pixel
+   -b BG, --background=BG
+                         set the background color e.g. #RRGGBB
+   -f FG, --foreground=FG
+                         set the foreground color e.g. #RRGGBB
+   -i IL, --inputlanguage=IL
+                         set the input language, default is auto. e.g. 'en'
+                         'it' 'de'
+   -o OL, --outputlanguage=OL
+                         set the output language, default is en. e.g. 'en' 'it'
+                         'de'
+
