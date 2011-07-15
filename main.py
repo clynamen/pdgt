@@ -1,0 +1,46 @@
+# File: bind1.py
+import sys
+from tkinter import *
+from translator import *
+from optparse import OptionParser
+
+usage = "usage: %prog [options] arg1\n\n Right click on bar to retrive translation of the mouse selection"
+version = "prog 0.1"
+parser = OptionParser(usage=usage, version=version)
+parser.add_option("-w", "--width", dest="width", default=100,
+                      help="set the width of the window in character units", type="int")
+parser.add_option("-x", "--xposition", dest="x", default=0,
+                      help="set the horizontal position of the window in pixel", type="int")
+parser.add_option("-y", "--yposition", dest="y", default=0,
+                      help="set the vertical position of the window in pixel", type="int")
+parser.add_option("-b", "--background", dest="bg", default="#FFFFFF",
+                      help="set the background color e.g. #RRGGBB ", type="string")
+parser.add_option("-f", "--foreground", dest="fg", default="#000000",
+                      help="set the foreground color e.g. #RRGGBB", type="string")
+parser.add_option("-i", "--inputlanguage", dest="il", default="auto",
+                      help="set the input language, default is auto. e.g. 'en' 'it' 'de'", type="string")
+parser.add_option("-o", "--outputlanguage", dest="ol", default="en",
+                      help="set the output language, default is en. e.g. 'en' 'it' 'de'", type="string")
+
+(options, args) = parser.parse_args()
+  
+root = Tk()
+root.geometry("+{0}+{1}".format(options.x,options.y))
+text = StringVar()
+translator = Translator(options.il, options.ol)
+
+def callback(event):
+  data = event.widget.selection_get(selection="PRIMARY")
+  data = translator.translate(data)
+  text.set(data)
+
+entry = Entry(root, state="readonly", width=options.width, textvariable=text, 
+    fg=options.fg, bg=options.bg, disabledforeground=options.fg,
+    disabledbackground=options.bg, highlightbackground=options.bg,
+    highlightcolor=options.bg, readonlybackground=options.bg)
+entry.pack_propagate(0)
+entry.pack()
+
+root.bind("<Button-3>", callback)
+
+root.mainloop()
